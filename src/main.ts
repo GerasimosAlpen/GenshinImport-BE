@@ -25,6 +25,11 @@ app.get("/health", (_req: express.Request, res: express.Response) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+// Root check
+app.get("/", (_req: express.Request, res: express.Response) => {
+  res.send("Genshin Import API is running");
+});
+
 // Domain Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/weapons", weaponRoutes);
@@ -41,7 +46,7 @@ const PORT = env.PORT || 3000;
 
 if (env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port http://localhost:${PORT}`);
   });
 }
 
