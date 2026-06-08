@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { adminController } from '../controllers/admin.controller';
-import { requireAuth, requireAdmin } from '../middlewares/auth.middleware';
+import { authentication, authorization } from '../middlewares/auth.middleware';
 import { validateRequest } from '../middlewares/validate.middleware';
 import {
   createWeaponSchema,
@@ -12,8 +12,8 @@ import {
 const router = Router();
 
 // Protect all admin routes
-router.use(requireAuth);
-router.use(requireAdmin);
+router.use(authentication);
+router.use(authorization);
 
 // Dashboard
 router.get('/dashboard', adminController.getDashboard);

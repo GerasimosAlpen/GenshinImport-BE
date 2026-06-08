@@ -1,6 +1,7 @@
-import { z } from 'zod';
+import { z, ZodType } from 'zod';
+import { CheckoutInput } from '../types/purchase.types';
 
-export const checkoutSchema = z.object({
+export const checkoutSchema: ZodType<CheckoutInput> = z.object({
   items: z.array(
     z.object({
       weaponId: z.number().int().positive().optional().nullable(),

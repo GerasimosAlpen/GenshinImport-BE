@@ -4,7 +4,7 @@ import { env } from '../config/env';
 import { CustomError } from '../utils/custom-error';
 import { Role } from '../../generated/prisma/client';
 
-export const requireAuth = (req: Request, res: Response, next: NextFunction) => {
+export const authentication = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader?.startsWith('Bearer ')) {
@@ -26,7 +26,7 @@ export const requireAuth = (req: Request, res: Response, next: NextFunction) => 
   }
 };
 
-export const requireAdmin = (req: Request, res: Response, next: NextFunction) => {
+export const authorization = (req: Request, res: Response, next: NextFunction) => {
   if (!req.user) {
     return next(new CustomError(401, 'Unauthorized: No user session'));
   }

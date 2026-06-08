@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'node:path';
 import fs from 'node:fs';
 import { CustomError } from '../utils/custom-error';
-import { requireAuth, requireAdmin } from '../middlewares/auth.middleware';
+import { authentication, authorization } from '../middlewares/auth.middleware';
 
 const router = Router();
 
@@ -44,7 +44,7 @@ const upload = multer({
 });
 
 // Protect upload route to Admin only
-router.post('/', requireAuth, requireAdmin, upload.single('file'), (req: Request, res: Response, next: NextFunction) => {
+router.post('/', authentication, authorization, upload.single('file'), (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.file) {
       throw new CustomError(400, 'Please upload a file');
