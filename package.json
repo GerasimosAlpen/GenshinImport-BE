@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/main.ts",
+    "dev": "nodemon --exec \"node -r ts-node/register\" src/main.ts",
     "build": "tsc",
     "start": "node dist/src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -38,6 +38,6 @@
     "typescript": "^6.0.3"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "node -r ts-node/register prisma/seed.ts"
   }
 }
