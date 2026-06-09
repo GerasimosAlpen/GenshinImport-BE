@@ -1,4 +1,4 @@
-import { ArtifactType } from '../../generated/prisma/client';
+import { ArtifactType } from '../models';
 
 export type ArtifactQueryInput = {
   page: number;

@@ -3,10 +3,10 @@ import jwt from 'jsonwebtoken';
 import { authRepository } from '../repositories/auth.repository';
 import { env } from '../config/env';
 import { CustomError } from '../utils/custom-error';
-import { Prisma } from '../../generated/prisma/client';
+import { UserCreateInput } from '../models';
 
 export class AuthService {
-  async register(data: Prisma.UserCreateInput) {
+  async register(data: UserCreateInput) {
     const existingUser = await authRepository.findUserByEmail(data.email);
     if (existingUser) {
       throw new CustomError(400, 'Email already exists');
@@ -57,6 +57,7 @@ export class AuthService {
       googleId,
       email,
       username,
+      role: 'USER',
     });
 
     const token = this.generateToken(user.id, user.role);

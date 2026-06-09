@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { artifactService } from '../services/artifact.service';
-import { ArtifactType } from '../../generated/prisma/client';
+import { ArtifactType } from '../models';
 
 export class ArtifactController {
   async getAllArtifacts(req: Request, res: Response, next: NextFunction) {

@@ -1,20 +1,20 @@
-import { prisma } from '../config/prisma';
+import { pool } from '../config/db';
 
 export class AdminRepository {
   async getDashboardStats() {
-    const [totalUsers, totalWeapons, totalArtifacts, totalPurchases, totalRevenueRaw] = await Promise.all([
-      prisma.user.count(),
-      prisma.weapon.count(),
-      prisma.artifact.count(),
-      prisma.purchase.count(),
-      prisma.purchase.aggregate({
-        _sum: {
-          totalPrice: true,
-        },
-      }),
+    const [[usersRes], [weaponsRes], [artifactsRes], [purchasesRes], [revenueRes]] = await Promise.all([
+      pool.query('SELECT COUNT(*) as count FROM User'),
+      pool.query('SELECT COUNT(*) as count FROM Weapon'),
+      pool.query('SELECT COUNT(*) as count FROM Artifact'),
+      pool.query('SELECT COUNT(*) as count FROM Purchase'),
+      pool.query('SELECT SUM(totalPrice) as total FROM Purchase'),
     ]);
 
-    const totalRevenue = totalRevenueRaw._sum.totalPrice ? Number(totalRevenueRaw._sum.totalPrice) : 0;
+    const totalUsers = Number(usersRes[0].count);
+    const totalWeapons = Number(weaponsRes[0].count);
+    const totalArtifacts = Number(artifactsRes[0].count);
+    const totalPurchases = Number(purchasesRes[0].count);
+    const totalRevenue = revenueRes[0].total ? Number(revenueRes[0].total) : 0;
 
     return {
       totalUsers,

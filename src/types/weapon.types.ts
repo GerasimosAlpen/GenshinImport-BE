@@ -1,4 +1,4 @@
-import { WeaponType } from '../../generated/prisma/client';
+import { WeaponType } from '../models';
 
 export type WeaponQueryInput = {
   page: number;

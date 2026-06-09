@@ -1,6 +1,6 @@
 import { weaponRepository } from '../repositories/weapon.repository';
 import { CustomError } from '../utils/custom-error';
-import { WeaponType, Prisma } from '../../generated/prisma/client';
+import { WeaponType, WeaponCreateInput, WeaponUpdateInput } from '../models';
 
 export class WeaponService {
   async getAllWeapons(query: { page: number; limit: number; type?: WeaponType; search?: string }) {
@@ -25,11 +25,11 @@ export class WeaponService {
   }
 
   // Admin methods
-  async createWeapon(data: Prisma.WeaponCreateInput) {
+  async createWeapon(data: WeaponCreateInput) {
     return weaponRepository.create(data);
   }
 
-  async updateWeapon(id: number, data: Prisma.WeaponUpdateInput) {
+  async updateWeapon(id: number, data: WeaponUpdateInput) {
     await this.getWeaponById(id); // Check existence
     return weaponRepository.update(id, data);
   }

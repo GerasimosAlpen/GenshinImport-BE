@@ -1,6 +1,6 @@
 import { artifactRepository } from '../repositories/artifact.repository';
 import { CustomError } from '../utils/custom-error';
-import { ArtifactType, Prisma } from '../../generated/prisma/client';
+import { ArtifactType, ArtifactCreateInput, ArtifactUpdateInput } from '../models';
 
 export class ArtifactService {
   async getAllArtifacts(query: { page: number; limit: number; type?: ArtifactType; search?: string }) {
@@ -25,11 +25,11 @@ export class ArtifactService {
   }
 
   // Admin methods
-  async createArtifact(data: Prisma.ArtifactCreateInput) {
+  async createArtifact(data: ArtifactCreateInput) {
     return artifactRepository.create(data);
   }
 
-  async updateArtifact(id: number, data: Prisma.ArtifactUpdateInput) {
+  async updateArtifact(id: number, data: ArtifactUpdateInput) {
     await this.getArtifactById(id); // Check existence
     return artifactRepository.update(id, data);
   }

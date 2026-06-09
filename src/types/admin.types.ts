@@ -1,4 +1,4 @@
-import { WeaponType, ArtifactType } from '../../generated/prisma/client';
+import { WeaponType, ArtifactType } from '../models';
 
 export type CreateWeaponInput = {
   name: string;

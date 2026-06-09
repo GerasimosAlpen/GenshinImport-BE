@@ -2,8 +2,7 @@ import bcrypt from 'bcrypt';
 import { profileRepository } from '../repositories/profile.repository';
 import { authRepository } from '../repositories/auth.repository';
 import { CustomError } from '../utils/custom-error';
-import { Prisma } from '../../generated/prisma/client';
-
+import { User } from '../models';
 export class ProfileService {
   async updateProfile(userId: number, data: { username?: string; email?: string; password?: string }) {
     // Check if user exists
@@ -12,7 +11,7 @@ export class ProfileService {
       throw new CustomError(404, 'User not found');
     }
 
-    const updateData: Prisma.UserUpdateInput = {};
+    const updateData: Partial<User> = {};
 
     if (data.username) updateData.username = data.username;
     if (data.email) {

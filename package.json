@@ -7,15 +7,15 @@
     "dev": "nodemon --exec \"node -r ts-node/register\" src/main.ts",
     "build": "tsc",
     "start": "node dist/src/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:init": "node -r ts-node/register scripts/init-db.ts",
+    "db:seed": "node -r ts-node/register scripts/seed.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@prisma/adapter-mariadb": "^7.8.0",
-    "@prisma/client": "^7.8.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
@@ -33,11 +33,6 @@
     "@types/multer": "^2.1.0",
     "@types/node": "^25.9.2",
     "nodemon": "^3.1.14",
-    "prisma": "^7.8.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^6.0.3"
-  },
-  "prisma": {
-    "seed": "node -r ts-node/register prisma/seed.ts"
+    "ts-node": "^10.9.2"
   }
 }

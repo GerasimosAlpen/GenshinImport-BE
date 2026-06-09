@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { weaponService } from '../services/weapon.service';
-import { WeaponType } from '../../generated/prisma/client';
+import { WeaponType } from '../models';
 
 export class WeaponController {
   async getAllWeapons(req: Request, res: Response, next: NextFunction) {
